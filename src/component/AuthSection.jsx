@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const AuthSection = () => {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -8,7 +10,8 @@ const AuthSection = () => {
     fullName: "",
     email: "",
     password: "",
-    role: "",
+    mobile: "",
+    role: "student",
     funnyName: "",
   });
 
@@ -17,9 +20,22 @@ const AuthSection = () => {
     "🚀", "❤️", "⚡", "🎉", "🐱", "🍀", "🌟",
   ];
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { login, register, isAuthenticated, loading, error, clearError } = useAuth();
   const [success, setSuccess] = useState("");
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
+
+  // Clear error when switching between login/signup
+  useEffect(() => {
+    clearError();
+    setSuccess("");
+  }, [isSignUp, clearError]);
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,14 +43,55 @@ const AuthSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    clearError();
     setSuccess("");
-    setLoading(true);
-    // Demo simulation of backend call
-    setTimeout(() => {
-      setSuccess(isSignUp ? "Signup successful!" : "Login successful!");
-      setLoading(false);
-    }, 1200);
+
+    // Basic validation
+    if (!formData.email || !formData.password) {
+      return;
+    }
+
+    if (isSignUp && !formData.fullName) {
+      return;
+    }
+
+    try {
+      if (isSignUp) {
+        const userData = {
+          name: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+          mobile: formData.mobile,
+          role: formData.role,
+          avatar: selectedAvatar,
+          ...(formData.funnyName && { funnyName: formData.funnyName })
+        };
+        
+        await register(userData);
+        setSuccess("Registration successful! Please login to continue.");
+        setTimeout(() => {
+          setIsSignUp(false);
+          setFormData({
+            fullName: "",
+            email: formData.email, // Keep email for convenience
+            password: "",
+            mobile: "",
+            role: "student",
+            funnyName: "",
+          });
+        }, 2000);
+      } else {
+        await login({
+          email: formData.email,
+          password: formData.password
+        });
+        setSuccess("Login successful! Welcome back!");
+        setTimeout(() => navigate('/'), 1500);
+      }
+    } catch (error) {
+      // Error is handled by the auth context
+      console.error('Auth error:', error);
+    }
   };
 
   return (
@@ -153,6 +210,19 @@ const AuthSection = () => {
                     name="fullName"
                     placeholder="Full Name"
                     value={formData.fullName}
+                    onChange={handleInputChange}
+                    className="w-full pl-12 pr-4 py-3 rounded-lg bg-green-50 border border-green-100 text-gray-700 font-medium focus:ring-2 focus:ring-emerald-300 outline-none"
+                  />
+                </div>
+
+                {/* Mobile Number */}
+                <div className="mb-4 relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">📱</span>
+                  <input
+                    type="tel"
+                    name="mobile"
+                    placeholder="Mobile Number"
+                    value={formData.mobile}
                     onChange={handleInputChange}
                     className="w-full pl-12 pr-4 py-3 rounded-lg bg-green-50 border border-green-100 text-gray-700 font-medium focus:ring-2 focus:ring-emerald-300 outline-none"
                   />
