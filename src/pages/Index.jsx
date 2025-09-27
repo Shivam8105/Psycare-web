@@ -4,6 +4,7 @@ import TestimonialsSection from '../component/Testimonial.jsx';
 import FeaturesSection from '../component/Features.jsx';
 import FAQSection from '../component/FAQ.jsx';
 import useScrollAnimations from '../hooks/useScrollAnimations.js';
+import Footer from '../component/Footer.jsx';
 
 
 const LandingPage = () => {
@@ -25,6 +26,7 @@ const LandingPage = () => {
         <FeaturesSection />
         <TestimonialsSection />
         <FAQSection />
+        <Footer />
       </div>
     </main>
   );

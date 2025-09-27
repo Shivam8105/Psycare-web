@@ -1,80 +1,87 @@
-import { Mail, Instagram, Youtube, Twitter, Facebook, MapPin } from "lucide-react";
+export default function Footer() {
+  return (
+    <footer className="bg-gradient-to-r from-green-50 via-emerald-50 to-teal-50 backdrop-blur-sm py-16 border-t border-green-200/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-12">
 
-const Footer = () => (
-  <footer className="relative pb-20 overflow-hidden bg-[#F5FCF8]">
-    {/* Layered blurred green ellipses simulating rainbow rings */}
-    <div className="absolute top-[-40vw] left-1/2 -translate-x-1/2 w-[140vw] h-[140vw] bg-gradient-radial from-green-200 to-transparent opacity-40 rounded-full filter blur-[185px] z-0"></div>
-    <div className="absolute top-[-30vw] left-1/2 -translate-x-1/2 w-[120vw] h-[120vw] bg-gradient-radial from-green-300 via-green-100 to-transparent opacity-50 rounded-full filter blur-[150px] z-1"></div>
-    <div className="absolute top-[-20vw] left-1/2 -translate-x-1/2 w-[100vw] h-[100vw] bg-gradient-radial from-green-400 via-green-200 to-transparent opacity-70 rounded-full filter blur-[120px] z-10"></div>
-    <div className="absolute top-[-12vw] left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] bg-gradient-radial from-green-500 via-green-300 to-transparent opacity-80 rounded-full filter blur-[90px] z-20"></div>
-
-    {/* Main content container */}
-    <div className="relative z-30 max-w-7xl mx-auto px-4 text-center flex flex-col items-center pt-16">
-      <div className="mb-4">
-        <Mail className="mx-auto rounded-full bg-white p-3 text-green-700 shadow h-14 w-14" />
-      </div>
-      <p className="font-semibold text-green-700 mb-3 text-sm uppercase tracking-widest">Contact Us</p>
-      <h2 className="text-3xl md:text-5xl font-extrabold text-black max-w-3xl leading-tight">
-        We also need to have <span className="text-green-700">contact form</span> on the <span className="text-green-700">website</span>
-      </h2>
-      <p className="mt-3 mb-8 max-w-xl text-gray-600">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-      </p>
-      <button className="bg-green-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-800 transition-shadow shadow-lg">
-        Get Started &rarr;
-      </button>
-
-      {/* Social icons */}
-      <div className="flex space-x-6 mt-14">
-        {[Instagram, Facebook, Youtube, Twitter].map((Icon, i) => (
-          <a 
-            href="#" 
-            className="bg-white rounded-full p-3 shadow-sm hover:shadow-lg hover:scale-110 transition-transform"
-            key={i}
-            aria-label="Social media link"
-          >
-            <Icon className="w-6 h-6 text-green-700" />
-          </a>
-        ))}
-      </div>
-
-      {/* Footer sections */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20 w-full max-w-7xl text-green-900">
-        {/* Navigation */}
-        <div className="text-left">
-          <h3 className="font-bold text-lg mb-3">Navigation</h3>
-          <ul className="space-y-1 text-green-800">
-            <li><a href="#" className="hover:underline">Home</a></li>
-            <li><a href="#" className="hover:underline">For Lenders</a></li>
-            <li><a href="#" className="hover:underline">For Collection Agencies</a></li>
-          </ul>
-        </div>
-        {/* Brand */}
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex items-center space-x-3 mb-2">
-            <div className="bg-green-900 p-3 rounded-lg shadow text-white font-bold text-xl">P</div>
-            <h2 className="font-extrabold text-2xl">Psycare</h2>
+          {/* Brand Info */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-lg">P</span>
+              </div>
+              <div>
+                <h3 className="font-bold text-green-900 text-lg">PsyCare</h3>
+                <p className="text-xs text-green-700">by NeuroNova</p>
+              </div>
+            </div>
+            <p className="text-sm text-green-700">
+              Empowering students worldwide with mental wellness support and resources.
+            </p>
           </div>
-          <p className="max-w-xs text-center font-medium text-green-700">
-            Psycare is your digital mental health companion, designed to provide support when you need it most.
+
+          {/* Explore */}
+          <div>
+            <h4 className="font-semibold text-green-900 mb-4 relative inline-block">
+              <span className="absolute -left-3 -top-1 w-1 h-6 bg-green-500 rounded-full"></span>
+              Explore
+            </h4>
+            <ul className="space-y-3 text-sm text-green-700">
+              <li>
+                <a href="#ai-chat" className="hover:text-green-900 transition-colors hover:underline">AI Chat Support</a>
+              </li>
+              <li>
+                <a href="#book" className="hover:text-green-900 transition-colors hover:underline">Book a Counselor</a>
+              </li>
+              <li>
+                <a href="#resources" className="hover:text-green-900 transition-colors hover:underline">Wellness Resources</a>
+              </li>
+              <li>
+                <a href="#community" className="hover:text-green-900 transition-colors hover:underline">Community Forum</a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h4 className="font-semibold text-green-900 mb-4 relative inline-block">
+              <span className="absolute -left-3 -top-1 w-1 h-6 bg-green-500 rounded-full"></span>
+              Support
+            </h4>
+            <ul className="space-y-3 text-sm text-green-700">
+              <li><a href="#" className="hover:text-green-900 transition-colors hover:underline">Help Center</a></li>
+              <li><a href="#" className="hover:text-green-900 transition-colors hover:underline">Crisis Support</a></li>
+              <li><a href="#" className="hover:text-green-900 transition-colors hover:underline">Contact Us</a></li>
+              <li><a href="#" className="hover:text-green-900 transition-colors hover:underline">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          {/* Project Info */}
+          <div>
+            <h4 className="font-semibold text-green-900 mb-4 relative inline-block">
+              <span className="absolute -left-3 -top-1 w-1 h-6 bg-green-500 rounded-full"></span>
+              Project Details
+            </h4>
+            <ul className="space-y-3 text-sm text-green-700">
+              <li>Team: NeuroNova</li>
+              <li>Project: SIH25092</li>
+              <li>Category: Student Wellness</li>
+              <li className="flex items-center space-x-2">
+                <span>Status:</span>
+                <span className="px-3 py-1 bg-green-500 text-white rounded-full text-xs font-medium shadow-sm">Active</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-14 pt-6 border-t border-green-200/50 text-center">
+          <p className="text-sm text-green-700">
+            ©️ 2025 PsyCare by Team NeuroNova. Made with 💚 for student mental wellness.
           </p>
         </div>
-        {/* Contact */}
-        <div className="text-left">
-          <h3 className="font-bold text-lg mb-3">Contact</h3>
-          <div className="flex items-center mb-3 text-green-800">
-            <Mail className="mr-2 w-5 h-5" /> support@psycare.com
-          </div>
-          <div className="flex items-center text-green-800">
-            <MapPin className="mr-2 w-5 h-5" /> 123 Mental Health Ave, Wellness City, India
-          </div>
-        </div>
       </div>
-      <p className="text-green-700 text-sm mt-14">
-        &copy; {new Date().getFullYear()} Psycare. All rights reserved.
-      </p>
-    </div>
-  </footer>
-);
-
-export default Footer;
+    </footer>
+  );
+}
