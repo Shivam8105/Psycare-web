@@ -1,5 +1,4 @@
 import { Bot, UserCheck, BookOpen, Users, ActivitySquare, Heart, Sparkles } from "lucide-react";
-import { useState } from "react";
 
 const features = [
   {
@@ -63,8 +62,6 @@ const colorMap = {
 };
 
 const FeaturesSection = () => {
-  const [hoveredCard, setHoveredCard] = useState(null);
-
   return (
     <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto">
@@ -87,15 +84,12 @@ const FeaturesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {features.slice(0, 2).map((feature, index) => (
             <FeatureCard
               key={index}
               feature={feature}
-              isHovered={hoveredCard === index}
-              onHover={() => setHoveredCard(index)}
-              onLeave={() => setHoveredCard(null)}
-              stagger={index + 1}
+              staggerClass={index === 0 ? 'stagger-1' : 'stagger-2'}
             />
           ))}
           
@@ -103,49 +97,36 @@ const FeaturesSection = () => {
           <FeatureCard
             key={3}
             feature={features[3]}
-            isHovered={hoveredCard === 3}
-            onHover={() => setHoveredCard(3)}
-            onLeave={() => setHoveredCard(null)}
-            stagger={3}
+            staggerClass="stagger-3"
           />
           
           {/* Wellness Library in position 4 */}
           <FeatureCard
             key={2}
             feature={features[2]}
-            isHovered={hoveredCard === 2}
-            onHover={() => setHoveredCard(2)}
-            onLeave={() => setHoveredCard(null)}
-            stagger={4}
+            staggerClass="stagger-4"
           />
           
           {/* Green CTA Card in center position 5 */}
-          <CallToActionCard stagger={5} />
+          <CallToActionCard />
           
           {/* Mental Health Assessment in position 6 */}
           <FeatureCard
             key={4}
             feature={features[4]}
-            isHovered={hoveredCard === 4}
-            onHover={() => setHoveredCard(4)}
-            onLeave={() => setHoveredCard(null)}
-            stagger={6}
+            staggerClass="stagger-6"
           />
         </div>
       </div>
     </section>
   );
-};
-
-const FeatureCard = ({ feature, isHovered, onHover, onLeave, stagger = 1 }) => {
+};const FeatureCard = ({ feature, staggerClass = 'stagger-1' }) => {
   const colors = colorMap[feature.color];
   const Icon = feature.icon;
 
   return (
     <div
-      className={`features-card group p-6 md:p-8 rounded-2xl border transition-all duration-300 cursor-pointer bg-white hover:bg-gradient-to-br ${colors.bg} ${colors.border} ${isHovered ? 'transform -translate-y-2 shadow-xl scale-105' : 'shadow-md hover:shadow-lg'} fade-in-up stagger-${stagger}`}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
+      className={`features-card group p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl border cursor-pointer bg-white hover:bg-gradient-to-br ${colors.bg} ${colors.border} shadow-md hover:shadow-xl transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] fade-in-up ${staggerClass}`}
     >
       <div className={`w-12 h-12 sm:w-14 sm:h-14 ${colors.icon} rounded-xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
         <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
@@ -162,14 +143,10 @@ const FeatureCard = ({ feature, isHovered, onHover, onLeave, stagger = 1 }) => {
   );
 };
 
-const CallToActionCard = ({ stagger = 5 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const CallToActionCard = () => {
   return (
     <div
-      className={`features-card group p-6 bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 rounded-2xl text-white transition-all duration-300 cursor-pointer relative overflow-hidden h-fit self-center fade-in-up stagger-${stagger} ${isHovered ? 'transform -translate-y-2 shadow-2xl scale-105' : 'shadow-xl'}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className={`features-card group p-4 sm:p-6 bg-gradient-to-br from-green-500 via-green-600 to-emerald-600 rounded-xl sm:rounded-2xl text-white cursor-pointer relative overflow-hidden h-fit self-center shadow-xl hover:shadow-2xl transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] fade-in-up stagger-5`}
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">

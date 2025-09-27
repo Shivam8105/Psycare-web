@@ -1,12 +1,11 @@
 export default function HeroSection() {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7] min-h-[100vh] sm:min-h-[650px] smooth-scroll-content">
-      {/* Background with parallax effect */}
+    <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7] min-h-[100vh] sm:min-h-[650px]">
+      {/* Background image */}
       <img
         src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=cover&w=1200&q=80"
         alt="Calm landscape representing wellness"
-        className="absolute inset-0 w-full h-full object-cover opacity-70 parallax-slow"
-        style={{ transform: 'translateZ(0)' }}
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#065f46]/90 via-[#047857]/70 to-[#10b981]/50"></div>
       <div
